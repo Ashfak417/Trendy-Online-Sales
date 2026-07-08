@@ -19,15 +19,15 @@ const SignupFormSchema = z.object({
 
 });
 
-const FormValidation = SignupFormSchema.safeParse({
-  name:"Jonew",
-  email:"ahg@gmail.com",
-  password:"111111",
-  confirmPassword:"111111"
+// const FormValidation = SignupFormSchema.safeParse({
+//   name:"Jonew",
+//   email:"ahg@gmail.com",
+//   password:"111111",
+//   confirmPassword:"111111"
 
-})
+// })
 
-console.log( "ZORD VALIDATION ",FormValidation.success );
+// console.log( "ZORD VALIDATION ",FormValidation.success );
 // // some untrusted data...
 // const input = { /* stuff */ };
  
@@ -52,8 +52,8 @@ function Page() {
   const {register,handleSubmit,formState:{errors}} = useForm<SignupFormData>({
     resolver: zodResolver(SignupFormSchema),
   })
-  //  const {register,handleSubmit,formState:{errors}} = useForm<SignupFormData>({})
-
+  
+  console.log("FORM ERRORS ",errors);
 
   
   return (
@@ -75,29 +75,43 @@ function Page() {
 
      <div>
       
-      <form className="flex gap-2 flex-col w-75">
+      <form onSubmit={handleSubmit((data) =>{
+        console.log("SUPPLIED data  ",data)
+        })} className="flex gap-2 flex-col w-75">
 
         <div className="flex flex-col gap-2.5">
           <label className="ml-2 font-semibold">Name</label>
-          <Input></Input>
+          <Input {...register("name")}></Input>
+          <p className="text-red-400">
+            {errors.name && errors.name.message}
+          </p>
         </div>
 
 
         <div className="flex flex-col gap-2.5">
           <label className="ml-2 font-semibold">Email</label>
-          <Input></Input>
+          <Input {...register("email")}></Input>
+          <p className="text-red-400">
+            {errors.email && errors.email.message}
+          </p>
         </div>
 
 
         <div className="flex flex-col gap-2.5">
           <label className="ml-2 font-semibold">Password</label>
-          <Input></Input>
+          <Input {...register("password")}></Input>
+          <p className="text-red-400">
+            {errors.password && errors.password.message}
+          </p>
         </div>
 
 
         <div className="flex flex-col gap-2.5">
           <label className="ml-2 font-semibold">Confirm password</label>
-          <Input></Input>
+          <Input {...register("confirmPassword")}></Input>
+          <p className="text-red-400">
+            {errors.confirmPassword && errors.confirmPassword.message}
+          </p>
         </div>
 
 
