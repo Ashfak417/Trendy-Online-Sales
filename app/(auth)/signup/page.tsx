@@ -53,8 +53,13 @@ function Page() {
     resolver: zodResolver(SignupFormSchema),
   })
   
-  console.log("FORM ERRORS ",errors);
+  //console.log("FORM ERRORS ",errors);
 
+  const FormSubmit =  (data) =>{
+    
+        console.log("SUPPLIED data  ",data)
+        
+  }
   
   return (
     <div className="h-screen bg-blue-200 flex items-center justify-center">
@@ -75,9 +80,7 @@ function Page() {
 
      <div>
       
-      <form onSubmit={handleSubmit((data) =>{
-        console.log("SUPPLIED data  ",data)
-        })} className="flex gap-2 flex-col w-75">
+      <form onSubmit={handleSubmit()} className="flex gap-2 flex-col w-75">
 
         <div className="flex flex-col gap-2.5">
           <label className="ml-2 font-semibold">Name</label>
